@@ -8,7 +8,7 @@ let toDoArray = localStorage.getItem(toDos);
 
 
 function saveLS(){
- localStorage.setItem(toDos,stringify(toDoArray));
+ localStorage.setItem(toDos,JSON.stringify(toDoArray));
 }
 
 function saveArray(text){
@@ -42,10 +42,16 @@ function submit (event){
   toDoInput.value = "";
 }
 
-
+function loadList(){
+  const loadedList = localStorage.getItem(toDos);
+  const parsedList = JSON.parse(loadedList);
+  parsedList.forEach(paintToDo(parsedList.text));
+}
 
 function init (){
   toDoForm.addEventListener("submit",submit);
-
+  if(toDoArray !== null){
+    loadList();
+  }
 }
 init();
