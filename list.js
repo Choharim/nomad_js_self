@@ -2,8 +2,14 @@ const toDoForm = document.querySelector(".toDo-Form"),
 toDoInput = toDoForm.querySelector("input"),
 toDoList = document.querySelector(".toDo-list");
 
-
 let toDoArray = [];
+const toDos = "toDoArray";
+let toDoArray = localStorage.getItem(toDos);
+
+
+function saveLS(){
+ localStorage.setItem(toDos,stringify(toDoArray));
+}
 
 function saveArray(text){
   const listId = toDoArray.length + 1;
@@ -23,6 +29,8 @@ function paintToDo(text){
   toDoList.appendChild(li);
   span.innerText = text;
   delBtn.innerText = "X";
+  const listId = toDoArray.length + 1;
+  li.id = listId;
   saveArray(text);
   saveLS();
 }
