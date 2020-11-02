@@ -22,11 +22,14 @@ function saveArray(text){
 
 function del(event){
   const clickedBtn = event.target,
-  li = clickedBtn.parentNode
+  li = clickedBtn.parentNode,
   toDoList.removeChild(li);
-  const updateArray =  toDoArray.filter(function(){
-
-  })
+  const updateArray =  toDoArray.filter(function(todo){
+    return todo.id !== li.id;
+  });
+  toDoArray = updateArray;
+  saveArray(toDoArray.text);
+  saveLS();
 }
 
 function paintToDo(text){
