@@ -2,34 +2,41 @@ const toDoForm = document.querySelector(".toDo-Form"),
 toDoInput = toDoForm.querySelector("input"),
 toDoList = document.querySelector(".toDo-list");
 
+
+const toDoArrayKey = "toDoArray";
 let toDoArray = [];
-const toDos = "toDoArray";
-let toDoArray = localStorage.getItem(toDos);
 
 
 function saveLS(){
- localStorage.setItem(toDos,JSON.stringify(toDoArray));
+ localStorage.setItem(toDoArrayKey,JSON.stringify(toDoArray));
 }
 
 function saveArray(text){
   const listId = toDoArray.length + 1;
   const toDoObject = {
-    text = text
-    id = listId
+    text: text,
+    id: listId
   };
   toDoArray.push(toDoObject);
 }
 
 function del(event){
-  const clickedBtn = event.target,
-  li = clickedBtn.parentNode,
+  const clickedBtn = event.target;
+  const li = clickedBtn.parentNode;
   toDoList.removeChild(li);
-  const updateArray =  toDoArray.filter(function(todo){
-    return todo.id !== li.id;
+  const updateArray =  toDoArray.filter(function(toDo){
+    return toDo.id !== parseInt(li.id);
   });
   toDoArray = updateArray;
-  saveArray(toDoArray.text);
   saveLS();
+}
+
+function loadList(){
+  const loadedList = localStorage.getItem(toDoArrayKey);
+  const parsedList = JSON.parse(loadedList);
+  parsedList.forEach(function(toDo){
+    paintToDo(toDo.text);
+  });
 }
 
 function paintToDo(text){
@@ -45,7 +52,7 @@ function paintToDo(text){
   li.id = listId;
   saveArray(text);
   saveLS();
-  delBtn.addEventListener("click",del());
+  delBtn.addEventListener("click",del);
 }
 
 function submit (event){
@@ -53,14 +60,6 @@ function submit (event){
   const inputValue = toDoInput.value;
   paintToDo(inputValue);
   toDoInput.value = "";
-}
-
-function loadList(){
-  const loadedList = localStorage.getItem(toDos);
-  const parsedList = JSON.parse(loadedList);
-  parsedList.forEach(function(todo){
-    paintToDo(todo.text)
-  });
 }
 
 function init (){
