@@ -20,6 +20,15 @@ function saveArray(text){
   toDoArray.push(toDoObject);
 }
 
+function del(event){
+  const clickedBtn = event.target,
+  li = clickedBtn.parentNode
+  toDoList.removeChild(li);
+  const updateArray =  toDoArray.filter(function(){
+
+  })
+}
+
 function paintToDo(text){
   const li = document.createElement("li"),
   span = document.createElement("span"),
@@ -33,6 +42,7 @@ function paintToDo(text){
   li.id = listId;
   saveArray(text);
   saveLS();
+  delBtn.addEventListener("click",del());
 }
 
 function submit (event){
@@ -45,7 +55,9 @@ function submit (event){
 function loadList(){
   const loadedList = localStorage.getItem(toDos);
   const parsedList = JSON.parse(loadedList);
-  parsedList.forEach(paintToDo(parsedList.text));
+  parsedList.forEach(function(todo){
+    paintToDo(todo.text)
+  });
 }
 
 function init (){
