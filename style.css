@@ -1,0 +1,14 @@
+.clock-time {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.clock-day {
+  font-size: 25px;
+}
+
+.clock-date {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
