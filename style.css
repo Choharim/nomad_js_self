@@ -5,6 +5,7 @@ body {
 .clock-time {
   font-size: 50px;
   font-weight: bold;
+  padding-right: 30px;
 }
 
 .clock-day {
@@ -15,15 +16,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: baseline;
+  padding-top: 180px;
+  padding-bottom: 30px;
 }
 
 .name,
 .hello {
   display: none;
+  text-align: center;
 }
 
 .showing {
   display: block;
+  text-align: center;
 }
 
 .bgImg {
@@ -42,4 +47,13 @@ body {
   100% {
     opacity: 1;
   }
+}
+
+.list-form {
+  text-align: center;
+}
+.do-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
